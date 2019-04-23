@@ -1,0 +1,13 @@
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\Interceptor\FeignRequestInterceptor.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\config\Swagger2Config.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\model\FileInfo.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\model\User.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\config\FeignMultipartSupportConfig.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\controller\UserController.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\controller\FeignUploadController.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\config\MvcConfigurer.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\service\UserFeignService.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\config\ApplicationExceptionAdapter.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\Interceptor\FeignTokenInterceptor.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\service\FileUploadFeignService.java
+E:\IDEAWorkspace\springcloudfeign\ch4-4-feign-upload-client\src\main\java\feign\SCFeignFileUploadApplication.java
