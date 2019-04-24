@@ -5,7 +5,3 @@ spring:
     config:
       uri: http://localhost:8888
 
-#feignclient发送get请求，传递参数为对象
-feign:
-  httpclient:
-    enabled: true

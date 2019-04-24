@@ -9,21 +9,24 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
 import feign.codec.Encoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "feign-file-server", configuration = UserFeignService.FormSupportConfig.class)//name value互相设置了别名，用哪个都一样
+//feign封装了ribbon,自带客户端负载均衡
+@FeignClient(name = "feign-server",
+        configuration = UserFeignService.FormSupportConfig.class)//name value互相设置了别名，用哪个都一样
 public interface UserFeignService {
 
-    @RequestMapping(value = "/user/add", method = RequestMethod.GET,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET
+            //,consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public String addUser(User user);
 
-    @RequestMapping(value = "/user/update", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST
+            //,consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public String updateUser(@RequestBody User user);
 
     /**

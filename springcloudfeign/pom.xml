@@ -11,8 +11,10 @@
     <modules>
         <module>ch4-4-eureka-server</module>
         <module>ch4-4-feign-file-server</module>
+        <module>ch4-4-feign-file-server-copy</module>
         <module>ch4-4-feign-upload-client</module>
         <module>ch4-4-config-server</module>
+        <module>ch5-ribbon-client</module>
     </modules>
 
     <parent>

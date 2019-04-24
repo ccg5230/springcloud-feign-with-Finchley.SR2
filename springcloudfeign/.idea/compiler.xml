@@ -7,18 +7,22 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ch4-4-config-server" />
+        <module name="ch4-4-feign-file-server-copy" />
         <module name="ch44eurekaserver" />
         <module name="ch44feignfileserver" />
         <module name="ch44feignuploadclient" />
+        <module name="ch5-ribbon-client" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ch4-4-config-server" options="-parameters" />
+      <module name="ch4-4-feign-file-server-copy" options="-parameters" />
       <module name="ch44eurekaserver" options="-parameters" />
       <module name="ch44feignfileserver" options="-parameters" />
       <module name="ch44feignuploadclient" options="-parameters" />
+      <module name="ch5-ribbon-client" options="-parameters" />
     </option>
   </component>
 </project>

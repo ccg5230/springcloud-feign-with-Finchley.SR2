@@ -2,6 +2,7 @@ feign\SCFeignFileUploadApplication.class
 feign\model\FileInfo.class
 feign\config\ApplicationExceptionAdapter.class
 feign\controller\UserController.class
+feign\service\UserFeignService$FormSupportConfig.class
 feign\service\UserFeignService.class
 feign\service\FileUploadFeignService.class
 feign\config\FeignMultipartSupportConfig.class

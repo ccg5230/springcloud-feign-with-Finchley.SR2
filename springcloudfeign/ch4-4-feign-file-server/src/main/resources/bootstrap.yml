@@ -1,6 +1,6 @@
 spring:
   application:
-    name: feign-file-server
+    name: feign-server
   cloud:
     config:
       uri: http://localhost:8888
