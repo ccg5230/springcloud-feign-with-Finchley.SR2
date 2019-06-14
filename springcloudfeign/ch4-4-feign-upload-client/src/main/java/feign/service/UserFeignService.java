@@ -3,6 +3,7 @@ package feign.service;
 import feign.Logger;
 import feign.form.spring.SpringFormEncoder;
 import feign.model.User;
+import feign.service.impl.FeignClientFallback;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -13,10 +14,11 @@ import feign.codec.Encoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //feign封装了ribbon,自带客户端负载均衡
-@FeignClient(name = "feign-server",
-        configuration = UserFeignService.FormSupportConfig.class)//name value互相设置了别名，用哪个都一样
+@FeignClient(name = "feign-server",//name value互相设置了别名，用哪个都一样
+        configuration = UserFeignService.FormSupportConfig.class)
 public interface UserFeignService {
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET

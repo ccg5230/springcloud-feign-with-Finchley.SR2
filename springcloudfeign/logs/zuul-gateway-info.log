@@ -2540,3 +2540,7 @@ Consider defining a bean of type 'com.netflix.client.config.IClientConfig' in yo
 				-Resolving eureka endpoints via configuration
 2019-04-24 23:29:13.686 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver
 				-Resolving eureka endpoints via configuration
+2019-04-24 23:34:13.686 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver
+				-Resolving eureka endpoints via configuration
+2019-04-24 23:39:13.690 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver
+				-Resolving eureka endpoints via configuration

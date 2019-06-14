@@ -7,9 +7,17 @@ eureka:
       defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
   server:
     enableSelfPreservation: false
+  instance:
+    prefer-ip-address: true
 
-instance:
-  prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
 
 
 

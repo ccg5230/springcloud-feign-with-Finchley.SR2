@@ -1,7 +1,0 @@
-server:
-  port: 8011
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/

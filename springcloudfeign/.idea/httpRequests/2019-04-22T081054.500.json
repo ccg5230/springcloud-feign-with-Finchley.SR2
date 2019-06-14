@@ -1,7 +1,0 @@
-{
-  "timestamp": 1555935054548,
-  "status": 500,
-  "error": "Internal Server Error",
-  "message": "Failed to parse multipart servlet request; nested exception is java.io.IOException: org.apache.tomcat.util.http.fileupload.FileUploadException: the request was rejected because no multipart boundary was found",
-  "path": "/feign/upload"
-}
