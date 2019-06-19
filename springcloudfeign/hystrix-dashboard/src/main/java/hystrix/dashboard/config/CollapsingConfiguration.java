@@ -5,11 +5,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.Controller;
 
 @Configuration
-public class CacheConfiguration {
+public class CollapsingConfiguration {
 	
     @Bean
     @ConditionalOnClass(Controller.class)
@@ -19,7 +20,7 @@ public class CacheConfiguration {
 
     @Configuration
     @ConditionalOnClass(Controller.class)
-    public class WebMvcConfig extends WebMvcConfigurerAdapter {
+    public class WebMvcConfig implements WebMvcConfigurer {//extends WebMvcConfigurerAdapter { //springboot2.x中已过时
         @Autowired
         HystrixContextInterceptor userContextInterceptor;
         @Override

@@ -19,12 +19,12 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(User user , HttpServletRequest request){
 		String token=request.getHeader("oauthToken");
-		return "hello,"+user.getName();
+		return "hello,"+user.getUsername();
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateUser( @RequestBody User user){
-		return "hello,"+user.getName();
+		return "hello,"+user.getUsername();
 	}
 
 	@GetMapping("/getUser")

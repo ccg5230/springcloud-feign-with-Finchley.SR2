@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 @RestController
+@RequestMapping("/cache")
 public class CacheController {
 	private static final Logger logger = LoggerFactory.getLogger(CacheController.class);
 	
