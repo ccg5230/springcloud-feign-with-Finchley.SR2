@@ -29,9 +29,9 @@
   
   ### zuul-server
   zuul网关：
-        路由、路由前缀及ribbon负载均衡配置、本地跳转、http请求头设置
-        zuul filter、zuul权限集成、zuul限流、zuul动态路由、zuul灰度发布
-        zuul多层负载、zuul应用优化
+        路由、路由前缀及ribbon负载均衡配置、本地跳转、http请求头设置 <br> 
+        zuul filter、zuul权限集成、zuul限流、zuul动态路由、zuul灰度发布 <br> 
+        zuul多层负载、zuul应用优化 <br> 
   
   
   
