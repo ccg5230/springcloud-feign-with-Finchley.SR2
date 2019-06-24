@@ -27,4 +27,7 @@
   ### hystrix-turbine<br>
   hystrix与turbine整合，集群监控
   
+  ### zuul-server
+  zuul网关
+  
   
