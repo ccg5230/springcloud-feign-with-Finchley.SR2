@@ -22,12 +22,16 @@
   ribbon client客户端调用
   
   ### hystrix-dashboard<br>
-  Hystrix相关：dashboar 、使用缓存等
+  Hystrix相关：dashboar 、使用缓存、请求合并、线程隔离
   
   ### hystrix-turbine<br>
   hystrix与turbine整合，集群监控
   
   ### zuul-server
-  zuul网关
+  zuul网关：
+        路由、路由前缀及ribbon负载均衡配置、本地跳转、http请求头设置
+        zuul filter、zuul权限集成、zuul限流、zuul动态路由、zuul灰度发布
+        zuul多层负载、zuul应用优化
+  
   
   
