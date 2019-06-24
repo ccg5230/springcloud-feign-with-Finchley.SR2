@@ -1,6 +1,6 @@
 spring:
   application:
-    name: feign-server
+    name: feign-server #组成多个服务提供者，测试负载均衡,zuul-service-provider作为zuul网关测试服务提供者
   cloud:
     config:
       uri: http://localhost:8888

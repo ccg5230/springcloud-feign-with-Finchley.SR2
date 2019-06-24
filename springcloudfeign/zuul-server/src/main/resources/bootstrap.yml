@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: zuul-gateway
+server:
+  port: 9089
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
+    instance:
+      prefer-ip-address: true
+  server:
+    enableSelfPreservation: false #关闭自我保护,以确保Eureka注册中心将不可用的实例删除
+
+#zuul路由
+zuul:
+  #prefix: /myapi #代理前缀，配置后客户端访问服务需要加上前缀，可以使用stripPrefix=false关闭该功能
+  #ignoredServices: '*' #忽略的服务
+  #ignored-patterns: /**/hello/**  #忽略的接口
+  #servlet-path: / #zuul的默认context-path是/zuul，它会裁剪请求的url，设置了会导致本地跳转controller无法访问
+
+  #默认情况下，spring cloud zuul在请求路由时，会过滤掉http请求头信息中一些敏感信息，防止它们被传递到下游的外部服务器。
+      #默认的敏感头信息通过zuul.sensitiveHeaders参数定义，默认包括cookie,set-Cookie,authorization三个属性。
+  #sensitiveHeaders: #zuul.sensitiveHeaders= 设置全局http请求头为空
+
+  # 重定向问题：解决后端服务重定向导致用户浏览的host变成后端服务的host问题
+  add-host-header: true
+  #开启重试解决请求偶然失败问题,zuul可以配合ribbon（默认集成）来做重试
+  retryable: true
+  routes:
+    provider:
+      #1）前端通过/zuul的http访问，将会被后端“zuul-service-provider”服务处理
+      path: /server/** #**匹配任意数量的路径和字符，*匹配任意数量字符,/zuul开头需要设置servlet-path：/
+      sensitiveHeaders: Cookie,Set-Cookie,Authorization #路由开启自定义敏感头
+      #serviceId: feign-server #eureka负载均衡
+      serviceId: ribbon-route #使用ribbon路由
+      #1-2)路由到物理地址
+      #url: http://localhost:8013
+    #2）简化配置代替以上三行
+    #zuul-service-provider: /zuul/**
+    #4)forward本地跳转
+    local:
+      path: /forward/**
+      url: forward:/fwd/local #**后面内容会被追加到url的path之后
+
+
+ribbon:
+  MaxAutoRetries: 1 #同一个服务重试的次数(除去首次)
+  MaxAutoRetriesNextServer: 1  #切换相同服务数量
+  eureka:
+    enabled: false #使用ribbon路由时，要禁止ribbon使用Eureka中集成的负载均衡
+
+#3）zuul使用ribbon路由，不用配置eureka.client.serviceUrl.defaultZone，因为自己设置服务列表和负载均衡策略
+ribbon-route:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule     #Ribbon 负载均衡策略
+    listOfServers: localhost:8012,localhost:8013     #client services for Ribbon LB

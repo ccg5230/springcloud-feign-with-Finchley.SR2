@@ -6,9 +6,9 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/
   server:
-    enableSelfPreservation: false
+    enableSelfPreservation: false #关闭自我保护,以确保Eureka注册中心将不可用的实例删除
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: true #将IP注册到Eureka注册中心上，而如果不配置使用的是机器的主机名
 
 feign:
   hystrix:
