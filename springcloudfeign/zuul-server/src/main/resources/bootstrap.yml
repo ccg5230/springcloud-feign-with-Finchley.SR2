@@ -1,6 +1,11 @@
 spring:
   application:
     name: zuul-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
 server:
   port: 9089
 
@@ -27,29 +32,68 @@ zuul:
   # 重定向问题：解决后端服务重定向导致用户浏览的host变成后端服务的host问题
   add-host-header: true
   #开启重试解决请求偶然失败问题,zuul可以配合ribbon（默认集成）来做重试
+  #需要忽略的头部信息，不在传播到其他服务:zuul要允许与进行跨域相关的头信息
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
   retryable: true
   routes:
     provider:
       #1）前端通过/zuul的http访问，将会被后端“zuul-service-provider”服务处理
       path: /server/** #**匹配任意数量的路径和字符，*匹配任意数量字符,/zuul开头需要设置servlet-path：/
       sensitiveHeaders: Cookie,Set-Cookie,Authorization #路由开启自定义敏感头
-      #serviceId: feign-server #eureka负载均衡
-      serviceId: ribbon-route #使用ribbon路由
+      serviceId: feign-server #eureka负载均衡
+      #serviceId: ribbon-route #使用ribbon路由
       #1-2)路由到物理地址
       #url: http://localhost:8013
     #2）简化配置代替以上三行
     #zuul-service-provider: /zuul/**
     #4)forward本地跳转
-    local:
-      path: /forward/**
-      url: forward:/fwd/local #**后面内容会被追加到url的path之后
+#    local:
+#      path: /forward/**
+#      url: forward:/fwd/local #**后面内容会被追加到url的path之后
+    #OAuth2.0+JWT权限验证
+#    auth-test:
+#      path: /auth/**
+#      #url: http://localhost:8013/oauth/test
+#      serviceId: oauth-provider-server
+  #zuul-tatelimit限流 测试完关闭
+#  ratelimit:
+#    key-prefix: springcloud-book #按粒度拆分的临时变量key前缀
+#    enabled: true #启用开关
+#    repository: IN_MEMORY #key存储类型，默认是IN_MEMORY本地内存，此外还有多种形式
+#    behind-proxy: true #表示代理之后
+#    default-policy: #全局限流策略，可单独细化到服务粒度
+#      limit: 2 #在一个单位时间窗口的请求数量
+#      quota: 1 #在一个单位时间窗口的请求时间限制
+#      refresh-interval: 3 #单位时间窗口
+#      type:
+#        - user #可指定用户粒度
+#        - origin #可指定客户端地址粒度
+#        - url #可指定url粒度
 
+
+  #ZuulFilter可以通过配置去掉
+  FirstPreFilter:
+    pre: #filter类型
+      disable: true
+  SecondPreFilter:
+    pre:
+      disable: true
+  ThirdPreFilter :
+    pre:
+      disable: true
+  PostFilter:
+    pre:
+      disable: true
+  GroovyFilter:
+    pre:
+      disable: true
 
 ribbon:
   MaxAutoRetries: 1 #同一个服务重试的次数(除去首次)
   MaxAutoRetriesNextServer: 1  #切换相同服务数量
-  eureka:
-    enabled: false #使用ribbon路由时，要禁止ribbon使用Eureka中集成的负载均衡
+  #eureka:
+    #enabled: true #false 使用ribbon路由时，要禁止ribbon使用Eureka中集成的负载均衡
 
 #3）zuul使用ribbon路由，不用配置eureka.client.serviceUrl.defaultZone，因为自己设置服务列表和负载均衡策略
 ribbon-route:
@@ -57,3 +101,21 @@ ribbon-route:
     NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule     #Ribbon 负载均衡策略
     listOfServers: localhost:8012,localhost:8013     #client services for Ribbon LB
+
+#security:
+#  oauth2:
+#    client:
+#      client-id: zuul_gateway #OAuth2客户端ID
+#      client-secret: secret #OAuth2客户端密钥
+#      grant-type: password
+#      access-token-uri: http://localhost:7777/auth/oauth/token #令牌端点
+#      user-authorization-uri: http://localhost:7777/auth/oauth/authorize #授权端点
+#    authorization:
+#      check-token-access: http://localhost:7777/auth/oauth/check_token
+#    resource:
+#      #配置check-token的url地址；
+#      token-info-uri: http://localhost:7777/auth/oauth/check_token
+#      jwt:
+#        key-value: springcloud123 #密匙，使用对称加密方式，默认算法为HS256
+#    sso:
+#      login-path: http://localhost:7777/uaa/login

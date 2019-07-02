@@ -18,6 +18,8 @@
         <module>hystrix-dashboard</module>
         <module>hystrix-turbine</module>
         <module>zuul-server</module>
+        <module>auth-server</module>
+        <module>oauth-server-provider</module>
     </modules>
 
     <parent>
@@ -33,7 +35,9 @@
         <!-- jdk版本 -->
         <java.version>1.8</java.version>
         <!-- SpringCloud版本号，官方最新稳定版本 -->
-        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <!--<spring-cloud.version>Finchley.SR2</spring-cloud.version>-->
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <groovy.version>2.5.2</groovy.version>
     </properties>
 
     <dependencies>
@@ -69,5 +73,17 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--
+    需要配置build plugin解决groovy依赖包报错：
+    java.lang.ClassNotFoundException: org.codehaus.groovy.ast.MethodCallTransformation
+    -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
